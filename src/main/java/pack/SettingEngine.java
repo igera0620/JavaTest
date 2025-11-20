@@ -1,0 +1,96 @@
+package pack;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class SettingEngine
+ */
+@WebServlet("/SettingEngine")
+public class SettingEngine extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SettingEngine() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+
+		// フォームの値を取得
+		String lastName = request.getParameter("last_name");
+		String firstName = request.getParameter("first_name");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String passCheck = request.getParameter("pass_check");
+
+		// セッションからユーザーIDを取得
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginUserId") == null) {
+			// セッションが無い or ログインしてない
+			response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+			return;
+		}
+		int userId = (int) session.getAttribute("loginUserId");
+
+		// パスワード確認
+		if (!password.equals(passCheck)) {
+			request.setAttribute("error", "⚠️ パスワードが一致しません。");
+			request.getRequestDispatcher("/view/settings.jsp").forward(request, response);
+			return;
+		}
+
+		// ロジックを呼び出して更新処理を実行
+		SettingLogic logic = new SettingLogic();
+		boolean isUpdated = logic.updateUserInfo(userId, lastName, firstName, email, password);
+
+		// 結果に応じて遷移先を分岐
+		if (isUpdated) {
+			session.setAttribute("loginUserEmail", email); // セッション上のメールも更新
+			request.setAttribute("message", "アカウント情報を更新しました。");
+			response.sendRedirect(request.getContextPath() + "/view/setting_success.jsp");
+			
+		} else if (logic.existsEmailForOtherUser(email, userId)) {
+			HttpSession session3 = request.getSession();
+			session3.setAttribute("error", "このメールアドレスは既に使用されています。");
+			
+			session3.setAttribute("input_last_name", request.getParameter("last_name"));
+		    session3.setAttribute("input_first_name", request.getParameter("first_name"));
+		    session3.setAttribute("input_email", request.getParameter("email"));
+		    
+			response.sendRedirect(request.getContextPath() + "/view/setting.jsp");
+
+		} else {
+			HttpSession session3 = request.getSession();
+			session3.setAttribute("error", "更新に失敗しました。もう一度お試しください。");
+			
+			session3.setAttribute("input_last_name", request.getParameter("last_name"));
+		    session3.setAttribute("input_first_name", request.getParameter("first_name"));
+		    session3.setAttribute("input_email", request.getParameter("email"));
+		    
+			response.sendRedirect(request.getContextPath() + "/view/setting.jsp");
+		}
+	}
+}

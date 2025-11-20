@@ -1,0 +1,80 @@
+package pack;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+
+@WebServlet("/ProfileEngine") //プロフィール保存用サーブレット
+@MultipartConfig( // ファイルアップロードを受け取るための設定。指定しないと「ファイルアップロードを受け取る設定がされていません」という例外が発生。
+		fileSizeThreshold = 1024 * 1024, // 1MB
+		maxFileSize = 1024 * 1024 * 5, // 5MB
+		maxRequestSize = 1024 * 1024 * 10 // 10MB
+)
+public class ProfileEngine extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+
+		// フォームデータ取得
+		String nickname = request.getParameter("nickname");
+		String gender = request.getParameter("gender");
+		String birthDate = request.getParameter("birth_date");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String profileText = request.getParameter("profile_text");
+
+		Part iconPart = request.getPart("icon"); //文字データではなく、バイナリデータが送られるためPartで受け取る
+		String iconFileName = null; // アップロードされたファイル名を取得
+
+		if (iconPart != null && iconPart.getSize() > 0) { // ファイルがアップロードされているか確認
+			// ファイル名を取得
+			iconFileName = Paths.get(iconPart.getSubmittedFileName()).getFileName().toString(); //ブラウザが送信したファイル名を取得して、getFileName()でパスを除去。toString()で文字列に変換。
+
+			// 保存先ディレクトリを指定（プロジェクト内の /uploads フォルダ）
+			String uploadDir = getServletContext().getRealPath("/uploads"); //保存するフォルダの「実際のパス」を取得
+			File uploadDirFile = new File(uploadDir); //Fileオブジェクトを作成
+			if (!uploadDirFile.exists()) // フォルダが存在しない場合は作成
+				uploadDirFile.mkdirs(); //複数階層のディレクトリも作成可能
+
+			// ファイルを保存
+			iconPart.write(uploadDir + File.separator + iconFileName); //受け取った画像ファイルをサーバーの指定フォルダに保存する
+		}
+
+		HttpSession session = request.getSession(false); // 既存のセッションを取得
+		int userId = 0; // デフォルト値
+		if (session != null && session.getAttribute("loginUserId") != null) { // // セッションが存在することを確認→ユーザーiDがセッションに保存されているか確認
+			userId = (int) session.getAttribute("loginUserId"); // ユーザーIDをセッションから取得
+		} else {
+			System.out.println("⚠️ ログイン情報がありません");
+			response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+			return;
+		}
+
+		// ロジックに処理を任せる
+		ProfileLogic logic = new ProfileLogic();
+		boolean result = logic.saveProfile(userId, nickname, gender, birthDate, phone, address, profileText, iconFileName);
+
+		if (result) {
+			// 成功時にセッションへアイコンファイル名を登録
+			if (iconFileName != null && !iconFileName.isEmpty()) {
+				session.setAttribute("userIcon", iconFileName);
+			}
+
+			response.sendRedirect(request.getContextPath() + "/view/profile_success.jsp");
+		} else {
+			response.sendRedirect(request.getContextPath() + "/view/profile_error.jsp");
+		}
+	}
+}

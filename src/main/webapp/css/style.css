@@ -1,0 +1,476 @@
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+main {
+	flex: 1;
+	/* ← これでmainが空間を伸ばしてfooterを下に押す */
+	margin-top: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+h1 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+form {
+	display: inline-block;
+	margin: 20px auto;
+	text-align: center;
+}
+
+/* 入力フォームの基本スタイル */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="file"],
+select,
+textarea,
+input[type="submit"],
+input[type="button"] {
+	width: 300px;
+	/* 幅を統一 */
+	padding: 8px;
+	/* 内側の余白 */
+	margin-bottom: 10px;
+	/* 下部の余白 */
+	box-sizing: border-box;
+	/* パディングとボーダーを含む幅計算 */
+	display: block;
+	/* ブロック要素に */
+	margin-left: auto;
+	/* 中央寄せ */
+	margin-right: auto;
+	/* 中央寄せ */
+	border: 1px solid #ccc;
+	/* 薄いグレーの境界線 */
+	border-radius: 4px;
+	/* 角を丸く */
+	font-size: 14px;
+	/* フォントサイズ */
+}
+
+/* ラベル */
+label {
+	margin-bottom: 4px;
+	/* ラベルと入力欄の間隔 */
+	display: block;
+	/* ラベルをブロック要素に */
+	font-weight: bold;
+}
+
+/* ボタン */
+input[type="submit"],
+input[type="button"] {
+	background-color: #007BFF;
+	/* ボタンの背景色 */
+	color: white;
+	/* 文字色を白に */
+	border: none;
+	/* 境界線を削除 */
+	cursor: pointer;
+	/* ポインターに変更 */
+	transition: background-color 0.3s;
+	/* 背景色の変化をスムーズに */
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+	background-color: #0056b3;
+}
+
+/* テキストエリア */
+textarea {
+	resize: none;
+	/* サイズ変更を無効化 */
+	height: 200px;
+}
+
+/* リンク・メッセージ */
+p {
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+a {
+	color: #007BFF;
+	text-decoration: none;
+	/* 下線を削除 */
+}
+
+a:hover {
+	text-decoration: underline;
+	/* ホバー時に下線を表示 */
+}
+
+/* 👁パスワード表示切替アイコンを入力欄の中に配置 */
+.password-wrapper {
+	position: relative;
+	/* 入力欄とアイコンをまとめるための基準 */
+	width: 300px;
+	/* inputの幅と合わせる */
+	margin: 0 auto 10px;
+	/* 中央寄せ＋下に少し余白 */
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+	width: 100%;
+	/* wrapperに合わせる */
+	padding-right: 35px;
+	/* 👁アイコン分の余白を確保 */
+	box-sizing: border-box;
+}
+
+.password-wrapper button {
+	position: absolute;
+	right: 8px;
+	/* 右端に配置 */
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 18px;
+	color: #666;
+	padding: 0;
+}
+
+.password-wrapper button:hover {
+	color: #000;
+	/* ホバー時に濃く */
+}
+
+.danger_btn {
+	background-color: #dc3545 !important;
+	/* 赤色 */
+}
+
+.danger_btn:hover {
+	background-color: #a71d2a !important;
+	/* 濃い赤色 */
+}
+
+.footer {
+	background-color: #222;
+	border-top: 1px solid #ddd;
+	text-align: center;
+	color: #ddd;
+	font-size: 14px;
+	padding: 20px 10px;
+	margin-top: 50px;
+}
+
+.footer a {
+	color: #ddd;
+	text-decoration: none;
+	margin: 0 8px;
+}
+
+.footer a:hover {
+	text-decoration: underline;
+}
+
+.profile-page {
+	margin-top: 100px;
+	/* ヘッダーとの距離を少し増やす */
+	justify-content: center;
+	/* 上詰めに変更（中央寄せ解除） */
+	padding-top: 40px;
+	/* さらにゆとりを持たせる */
+}
+
+.setting_page {
+	margin-top: 100px;
+	/* ヘッダーとの距離を少し増やす */
+	justify-content: center;
+	/* 上詰めに変更（中央寄せ解除） */
+	padding-top: 40px;
+	/* さらにゆとりを持たせる */
+}
+
+/* calendar_page.jsp 専用スタイル */
+.calendar-main {
+	text-align: center;
+	margin-top: 30px;
+}
+
+/* カレンダー下のボタン配置 */
+.calendar-buttons {
+	margin-top: 30px;
+}
+
+.calendar-buttons form {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+/* ===== ボタン整列 ===== */
+.action-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+/* ===== 共通ボタン ===== */
+.btn,
+.danger_btn {
+	border: none;
+	border-radius: 5px;
+	color: white;
+	padding: 6px 12px;
+	font-weight: bold;
+	cursor: pointer;
+	min-width: 80px;
+	font-size: 14px;
+}
+
+.btn {
+	background-color: #007bff;
+}
+
+.btn:hover {
+	background-color: #0062cc;
+}
+
+.danger_btn {
+	background-color: #dc3545;
+}
+
+.danger_btn:hover {
+	background-color: #c82333;
+}
+
+/* ===== ページ下部ボタン ===== */
+.page-buttons {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+	margin-top: 30px;
+}
+
+/* ===== タスク一覧用のテーブル ===== */
+.task-table {
+	width: 80%;
+	margin: 30px auto;
+	border-collapse: collapse;
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	overflow: hidden;
+
+	table-layout: fixed;
+	/* ← ★これが超重要：列幅を固定する */
+}
+
+/* ===== ヘッダー部分 ===== */
+.task-table th {
+	background-color: #f0f0f0;
+	padding: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* ===== セル共通 ===== */
+.task-table td {
+	border-top: 1px solid #ddd;
+	padding: 10px;
+	word-wrap: break-word;
+	/* ← 長い単語も折り返す */
+	white-space: normal;
+	/* ← 折り返し有効 */
+	vertical-align: top;
+	/* ← 上揃えにして見やすく */
+}
+
+/* ===== 各列の幅指定 ===== */
+.task-table th:nth-child(1),
+.task-table td:nth-child(1) {
+	width: 100px;
+	/* 日付 */
+	text-align: center;
+}
+
+.task-table th:nth-child(2),
+.task-table td:nth-child(2) {
+	width: 70px;
+	/* 時間 */
+	text-align: center;
+}
+
+.task-table th:nth-child(3),
+.task-table td:nth-child(3) {
+	width: 180px;
+	/* タイトル（ある程度固定） */
+}
+
+.task-table th:nth-child(4),
+.task-table td:nth-child(4) {
+	width: auto;
+	/* 内容：残りを使用 */
+}
+
+/* ===== ホバー時の背景 ===== */
+.task-table tr:hover {
+	background-color: #f9f9f9;
+}
+
+/* ===== 編集・削除ボタン専用の小型スタイル ===== */
+.action-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	/* ボタン間の間隔 */
+}
+
+/* 小型ボタン専用 */
+.action-buttons .btn,
+.action-buttons .danger_btn {
+	width: 70px !important; /* ← ここで幅を強制上書き */
+	padding: 5px 8px !important; /* ← 高さも少し小さめに */
+	font-size: 12px !important; /* ← 文字も少し小さく */
+	border-radius: 4px !important;
+	font-weight: bold;
+	cursor: pointer;
+	display: inline-block;
+}
+
+/* 編集ボタン（青） */
+.action-buttons .btn {
+	background-color: #007bff !important;
+}
+
+.action-buttons .btn:hover {
+	background-color: #0062cc !important;
+}
+
+/* 削除ボタン（赤） */
+.action-buttons .danger_btn {
+	background-color: #dc3545 !important;
+}
+
+.action-buttons .danger_btn:hover {
+	background-color: #c82333 !important;
+}
+
+/* ===== 編集・削除ボタンエリア ===== */
+.action-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	/* ボタン間の間隔 */
+}
+
+/* ===== 下部ボタン群 ===== */
+.page-buttons {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+	margin-top: 30px;
+}
+
+.btn {
+	border: none;
+	border-radius: 5px;
+	color: white;
+	background-color: #007bff;
+	padding: 10px 20px;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 15px;
+	width: 200px;
+}
+
+.btn:hover {
+	background-color: #0062cc;
+}
+
+.task-list-page {
+	margin-top: 100px;
+	/* ヘッダーとの距離を広げる */
+	padding-top: 30px;
+	/* コンテンツの上部にゆとりを作る */
+}
+
+/* ====== タスク詳細ページ ====== */
+
+.task-detail-box {
+	width: 80%;
+	margin: 0 auto;
+	background: #fff;
+	padding: 25px 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 表のスタイル */
+.task-detail-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.task-detail-table th {
+	width: 180px;
+	/* 左列をコンパクトに */
+	background-color: #f6f6f6;
+	text-align: center;
+	padding: 12px;
+	border-bottom: 1px solid #ddd;
+}
+
+.task-detail-table td {
+	padding: 12px;
+	border-bottom: 1px solid #ddd;
+}
+
+.task-content {
+	white-space: pre-wrap;
+	font-family: inherit;
+}
+
+/* ボタン上下の余白 */
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-25 {
+	margin-top: 25px;
+}
+
+/* ボタンエリア */
+.action-buttons,
+.page-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.task-tag {
+	display: inline-block;
+	padding: 5px 12px;      /* 少し広め、btn に寄せる */
+	background-color: var(--tag-color, #777); /* デフォルト色 + 上書き可能 */
+    color: #fff;            /* 文字色は白 */
+    border-radius: 6px;     /* submitボタンの角丸に寄せる */
+    font-size: 13px;        /* 少し大きめにして見やすく */
+    font-weight: 600;       /* submitボタン風に太字 */
+    letter-spacing: 0.5px;  /* 少しだけ文字間を広げる */
+    margin-top: 4px;
+}

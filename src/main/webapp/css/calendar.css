@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  margin: 30px;
+}
+
+/* -------------------------------------
+   カレンダー本体
+-------------------------------------- */
+.calendar {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 90%;
+  table-layout: fixed;
+}
+
+.calendar th, .calendar td {
+  border: 1px solid #ccc;
+  width: 14.2%;
+  vertical-align: top;
+  padding: 4px;
+  height: 100px;
+}
+
+.calendar th { background: #f5f5f5; }
+.today       { background: #ffefc5 !important; }
+.empty       { background: #fafafa; color: #ccc; }
+
+/* 日付 */
+.date-num {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: １px;
+}
+
+/* -------------------------------------
+   タスク行
+-------------------------------------- */
+.task-row td {
+  height: 30px;
+  padding: 0;
+}
+
+/* -------------------------------------
+   タスクバー（Google 方式）
+-------------------------------------- */
+.task-bar {
+  position: relative;
+  width: calc(100% - 2px);  /* ← はみ出し防止 */
+  height: 28px;
+
+  margin-top: 2px;
+  border-radius: 6px;
+
+  box-sizing: border-box;    /* ← これ重要 */
+
+  padding: 4px 8px;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  background-color: color-mix(in srgb, var(--tagColor) 50%, white);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+/* 優先度ドット（右上） */
+.priority-dot {
+  position: absolute;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+/* 優先度色 */
+.prio-1 { background:#e53935; }
+.prio-2 { background:#fb8c00; }
+.prio-3 { background:#28a745; }
+
+/* タグ */
+.task-tag {
+  display: inline-block;
+  font-size: 10px;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* タイトルリンク */
+.task-bar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* -------------------------------------
+   ナビ
+-------------------------------------- */
+.calendar-nav {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.nav-arrow {
+  font-size:26px;
+  text-decoration:none;
+  color:#333;
+}
+
+.nav-arrow:hover { color:#0078d7; }
+
+.month-display {
+  cursor:pointer;
+  padding:4px 10px;
+  border-radius:4px;
+  font-size:32px;
+  font-weight:bold;
+}
+
+.month-display:hover { background:#eee; }
+
+.month-select {
+  font-size:20px;
+  padding:6px 12px;
+  border-radius:6px;
+  border:1px solid #aaa;
+}
