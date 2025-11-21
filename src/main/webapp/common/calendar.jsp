@@ -134,73 +134,73 @@ for (LocalDate[] week : weeks) {
 </thead>
 <tbody>
 
-		<!--  -->
+		<!-- カレンダー、タスク配置 -->
 	<%
-		for (int wi = 0; wi < weeks.size(); wi++) {
-		    LocalDate[] week = weeks.get(wi);
+		for (int wi = 0; wi < weeks.size(); wi++) { // 週ループ
+		    LocalDate[] week = weeks.get(wi); // その週の日付配列を取得
 		
 		    // 日付行
-		    out.println("<tr>");
-		    for (int i = 0; i < 7; i++) {
-		        LocalDate d = week[i];
-		        boolean isMonth = (d.getMonthValue() == month);
-		        String cls = (!isMonth ? "empty" : (d.equals(today) ? "today" : ""));
-		        out.println("<td class='"+cls+"'><div class='date-num'>"+d.getDayOfMonth()+"</div></td>");
+		    out.println("<tr>"); // 日付行開始
+		    for (int i = 0; i < 7; i++) { // 7日分ループ
+		        LocalDate d = week[i]; // 日付を取得
+		        boolean isMonth = (d.getMonthValue() == month); // 表示月かどうか判定
+		        String cls = (!isMonth ? "empty" : (d.equals(today) ? "today" : "")); // クラス名決定
+		        out.println("<td class='"+cls+"'><div class='date-num'>"+d.getDayOfMonth()+"</div></td>"); // 日付セル出力
 		    }
-		    out.println("</tr>");
+		    out.println("</tr>"); // 日付行終了
 		
 		    // タスク行（複数行
-		    List<List<TaskSpan>> lines = weekRows.get(wi);
-		    for (List<TaskSpan> line : lines) {
+		    List<List<TaskSpan>> lines = weekRows.get(wi); // その週のタスク行リストを取得
+		    for (List<TaskSpan> line : lines) { // タスク行ループ
 		
-		        out.println("<tr class='task-row'>");
+		        out.println("<tr class='task-row'>"); // タスク行開始
 		
-		        int col = 0;
-		        for (TaskSpan ts : line) {
-		            while (col < ts.startCol) {
-		                out.println("<td></td>");
-		                col++;
+		        int col = 0; // 列位置初期化
+		        for (TaskSpan ts : line) { // その行のタスクバーループ
+		            while (col < ts.startCol) { // タスクバー開始位置まで空セルを出力
+		                out.println("<td></td>"); // 空セル出力
+		                col++; // 列位置を進める
 		            }
 		
-		            Task t = ts.task;
-		            String color = t.getCategoryColor() != null ? t.getCategoryColor() : "#999";
-		            String tag = t.getCategoryName() != null ? t.getCategoryName() : "";
-		            String startTimeStr = (t.getStartTime() != null)
-		                    ? t.getStartTime().toString().substring(0,5)
-		                    : "";
+		            Task t = ts.task; // タスク本体取得
+		            String color = t.getCategoryColor() != null ? t.getCategoryColor() : "#999"; // カテゴリカラー取得（デフォルト色設定）
+		            String tag = t.getCategoryName() != null ? t.getCategoryName() : ""; // カテゴリ名取得（デフォルト空文字）
+		            String startTimeStr = (t.getStartTime() != null) //	 開始時間文字列取得
+		                    ? t.getStartTime().toString().substring(0,5)  // HH:MM形式に整形
+		                    : ""; // nullの場合は空文字
 		
-		            String endTimeStr = (t.getEndTime() != null)
-		                    ? t.getEndTime().toString().substring(0,5)
-		                    : "";
+		            String endTimeStr = (t.getEndTime() != null) // 終了時間文字列取得
+		                    ? t.getEndTime().toString().substring(0,5) // HH:MM形式に整形
+		                    : ""; // nullの場合は空文字
 		
-		            String time = "";
-		            if (!startTimeStr.isEmpty() && !endTimeStr.isEmpty()) {
-		                time = startTimeStr + "〜" + endTimeStr;
-		            } else if (!startTimeStr.isEmpty()) {
-		                time = startTimeStr;
-		            } else if (!endTimeStr.isEmpty()) {
-		                time = "〜" + endTimeStr;
+		            String time = ""; // 時間表示文字列初期化
+		            if (!startTimeStr.isEmpty() && !endTimeStr.isEmpty()) { // 両方ある場合
+		                time = startTimeStr + "〜" + endTimeStr; // HH:MM〜HH:MM形式
+		            } else if (!startTimeStr.isEmpty()) { // 開始時間のみある場合
+		                time = startTimeStr; // HH:MM形式
+		            } else if (!endTimeStr.isEmpty()) { // 終了時間のみある場合
+		                time = "〜" + endTimeStr; // 〜HH:MM形式
 		            }
-		            String dotClass = "prio-"+t.getPriority();
+		            String dotClass = "prio-"+t.getPriority(); // 優先度ドットのクラス名
 		
-		            out.println("<td colspan='"+ts.span+"' class='task-cell'>");
-		            out.println("<div class='task-bar' style='--tagColor:"+color+";'>");
-		            out.println("<span class='priority-dot "+dotClass+"'></span>");
-		            out.println("<a href='"+request.getContextPath()+"/TaskShowEngine?id="+t.getId()+"'>");
-		            out.println(time+" "+t.getTitle());
-		            out.println("</a>");
-		            out.println("<span class='task-tag' style='background:"+color+";'>"+tag+"</span>");
-		            out.println("</div></td>");
+		            out.println("<td colspan='"+ts.span+"' class='task-cell'>"); // タスクセル開始（colspanで横幅指定）
+		            out.println("<div class='task-bar' style='--tagColor:"+color+";'>"); // タスクバー開始（CSS変数でタグカラー指定）
+		            out.println("<span class='priority-dot "+dotClass+"'></span>"); // 優先度ドット出力
+		            out.println("<a href='"+request.getContextPath()+"/TaskShowEngine?id="+t.getId()+"'>"); // タスク詳細リンク開始
+		            out.println(time+" "+t.getTitle()); // タスクタイトル出力
+		            out.println("</a>"); // タスク詳細リンク終了
+		            out.println("<span class='task-tag' style='background:"+color+";'>"+tag+"</span>"); // タグ表示
+		            out.println("</div></td>"); // タスクバー・タスクセル終了
 		
-		            col += ts.span;
+		            col += ts.span; // 列位置をタスクバー分進める
 		        }
 		
-		        while (col < 7) {
-		            out.println("<td></td>");
-		            col++;
+		        while (col < 7) { // 行の残りセルを空セルで埋める
+		            out.println("<td></td>"); // 空セル出力
+		            col++; // 列位置を進める
 		        }
 		
-		        out.println("</tr>");
+		        out.println("</tr>"); // タスク行終了
 		    }
 		}
 	%>
