@@ -37,7 +37,7 @@ public class TaskListServlet extends HttpServlet {
 	        if (session == null || session.getAttribute("loginUserId") == null) {
 	            session = request.getSession();
 	            session.setAttribute("error", "ログインセッションが切れています。再ログインしてください。");
-	            response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+	            response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 	            return;
 	        }
 
@@ -49,7 +49,7 @@ public class TaskListServlet extends HttpServlet {
 
 	        // JSPにデータを渡してフォワード
 	        request.setAttribute("taskList", taskList);
-	        request.getRequestDispatcher("/view/list_task.jsp").forward(request, response);
+	        request.getRequestDispatcher("/view/task/list_task.jsp").forward(request, response);
 	    }
 
 	/**

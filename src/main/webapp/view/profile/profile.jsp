@@ -15,7 +15,7 @@
   <main class="profile-page">
   <h1>プロフィール設定</h1>
 
-  <form action="<%= request.getContextPath() %>/ProfileEngine" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data"はファイルアップロード用 -->
+  <form action="<%= request.getContextPath() %>/ProfileServlet" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data"はファイルアップロード用 -->
   
     <label for="nickname">ニックネーム</label>
     <input type="text" name="nickname" id="nickname"

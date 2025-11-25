@@ -87,12 +87,12 @@ public class TaskUpdateServlet extends HttpServlet {
             session.setAttribute("message", "タスクを更新しました。");
 
             // カレンダー画面へ戻る
-            response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+            response.sendRedirect(request.getContextPath() + "/CalendarServlet");
         } else {
             // 失敗時
         	HttpSession session = request.getSession();
         	session.setAttribute("error", "更新に失敗しました。");
-        	response.sendRedirect(request.getContextPath() + "/TaskEditEngine?id=" + id);
+        	response.sendRedirect(request.getContextPath() + "/TaskEditServlet?id=" + id);
         }
 	}
 }

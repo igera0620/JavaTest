@@ -36,7 +36,7 @@ public class CreateServlet extends HttpServlet {
 		
 		if (created) {
 			// 登録成功 - ブラウザのURLが /CreateEngine のままになるのを防ぐためリダイレクトする
-			response.sendRedirect(request.getContextPath() + "/view/create_success.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/auth/create_success.jsp");
 		} else {
 			// 登録失敗
 		    session.setAttribute("error", "アカウント作成に失敗しました。登録済みのメールアドレスです。");
@@ -47,7 +47,7 @@ public class CreateServlet extends HttpServlet {
 		    session.setAttribute("input_password", request.getParameter("password"));
 
 		    // create.jsp へリダイレクト
-		    response.sendRedirect(request.getContextPath() + "/view/create.jsp");
+		    response.sendRedirect(request.getContextPath() + "/view/auth/create.jsp");
 		}
 	}
 }

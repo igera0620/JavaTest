@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>プロフィール登録完了</title>
-<link rel="stylesheet" href="../css/style.css">
+	<meta charset="UTF-8">
+	<title>プロフィール登録完了</title>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/usericon.css">
 </head>
 <body>
 	<jsp:include page="/common/header.jsp" />
@@ -18,6 +19,8 @@
 			<input type="submit" value="ホーム画面へ戻る">
 		</form>
 		</main>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="<%= request.getContextPath() %>/js/main.js"></script>
 	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>

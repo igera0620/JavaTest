@@ -56,6 +56,6 @@ public class TaskDeleteServlet extends HttpServlet {
 	        session.setAttribute("message", "タスクの削除に失敗しました。");
 	    }
 
-	    response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+	    response.sendRedirect(request.getContextPath() + "/CalendarServlet");
 	}
 }

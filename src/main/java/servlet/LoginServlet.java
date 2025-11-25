@@ -71,19 +71,19 @@ public class LoginServlet extends HttpServlet {
 			}
 
 			// 成功したらログイン後画面へリダイレクト
-			response.sendRedirect(request.getContextPath() + "/view/success.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login_success.jsp");
 
 		} else if (result == 1) {
 			// 削除済みアカウントの場合
 			HttpSession session = request.getSession();
 			session.setAttribute("error", "このアカウントは削除されています。");
-			response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 
 		} else {
 			// 失敗したらエラーメッセージを表示
 			HttpSession session = request.getSession(); // ログイン情報が何もないのでセッションを取得する必要があるため記述
 			session.setAttribute("error", "メールアドレスまたはパスワードが違います。"); // エラーメッセージをセッションに保存。requestではなくsessionに保存することでリダイレクト先でも参照可能にする。
-			response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 		}
 	}
 }

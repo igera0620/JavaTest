@@ -51,7 +51,7 @@ public class TaskCreateServlet extends HttpServlet {
         request.setAttribute("categoryList", categoryList);
 
         // JSP へフォワード
-        request.getRequestDispatcher("/view/create_task.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/task/create_task.jsp").forward(request, response);
     }
 
 	/**
@@ -66,7 +66,7 @@ public class TaskCreateServlet extends HttpServlet {
 	    Integer userId = (Integer) session.getAttribute("loginUserId");
 	    if (userId == null) {
 	        session.setAttribute("error", "ログインセッションが切れています。再ログインしてください。");
-	        response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+	        response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 	        return;
 	    }
 
@@ -96,7 +96,7 @@ public class TaskCreateServlet extends HttpServlet {
 	        title == null || title.isEmpty()) {
 
 	        session.setAttribute("error", "開始日・タイトルは必須です。");
-	        response.sendRedirect(request.getContextPath() + "/view/create_task.jsp");
+	        response.sendRedirect(request.getContextPath() + "/view/task/create_task.jsp");
 	        return;
 	    }
 
@@ -159,10 +159,10 @@ public class TaskCreateServlet extends HttpServlet {
 	        session.removeAttribute("input_priority");
 
 	        session.setAttribute("message", "タスクを登録しました。");
-	        response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+	        response.sendRedirect(request.getContextPath() + "/CalendarServlet");
 	    } else {
 	        session.setAttribute("error", "タスク登録に失敗しました。");
-	        response.sendRedirect(request.getContextPath() + "/view/create_task.jsp");
+	        response.sendRedirect(request.getContextPath() + "/view/task/create_task.jsp");
 	    }
 	}
 }

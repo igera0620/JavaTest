@@ -31,10 +31,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>アカウント設定</title>
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/usericon.css">
+	<meta charset="UTF-8">
+	<title>アカウント設定</title>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/usericon.css">
 </head>
 
 <body>
@@ -52,7 +52,7 @@
     <h1>アカウント設定</h1>
     <p>登録情報の変更ができます。</p>
 
-    <form action="<%= request.getContextPath() %>/SettingEngine" method="post">
+    <form action="<%= request.getContextPath() %>/SettingServlet" method="post">
 
       <label for="last_name">姓</label>
 	  <input type="text" name="last_name" id="last_name"
@@ -90,7 +90,7 @@
   	  <input type="submit" formaction="<%= request.getContextPath() %>/view/index.jsp"
   	  		 formmethod="get" formnovalidate value="ホームへ戻る">
   	  		 
-  	  <input type="submit" class="danger_btn" formaction="<%= request.getContextPath() %>/DeleteEngine"
+  	  <input type="submit" class="danger_btn" formaction="<%= request.getContextPath() %>/DeleteServlet"
   	  		 formmethod="post" formnovalidate value="アカウント削除" 
   	  		 onclick="return confirm('本当にアカウントを削除しますか？この操作は元に戻せません。');">
     </form>
@@ -107,7 +107,7 @@
   %>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="../js/main.js"></script>
+  <script src="<%= request.getContextPath() %>/js/main.js"></script>
   <jsp:include page="/common/footer.jsp" />
 </body>
 </html>

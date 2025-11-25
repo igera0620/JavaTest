@@ -72,7 +72,7 @@ public class SettingServlet extends HttpServlet {
 		if (isUpdated) {
 			session.setAttribute("loginUserEmail", email); // セッション上のメールも更新
 			request.setAttribute("message", "アカウント情報を更新しました。");
-			response.sendRedirect(request.getContextPath() + "/view/setting_success.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/setting/setting_success.jsp");
 			
 		} else if (logic.existsEmailForOtherUser(email, userId)) {
 			HttpSession session3 = request.getSession();
@@ -82,7 +82,7 @@ public class SettingServlet extends HttpServlet {
 		    session3.setAttribute("input_first_name", request.getParameter("first_name"));
 		    session3.setAttribute("input_email", request.getParameter("email"));
 		    
-			response.sendRedirect(request.getContextPath() + "/view/setting.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/setting/setting.jsp");
 
 		} else {
 			HttpSession session3 = request.getSession();
@@ -92,7 +92,7 @@ public class SettingServlet extends HttpServlet {
 		    session3.setAttribute("input_first_name", request.getParameter("first_name"));
 		    session3.setAttribute("input_email", request.getParameter("email"));
 		    
-			response.sendRedirect(request.getContextPath() + "/view/setting.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/setting/setting.jsp");
 		}
 	}
 }

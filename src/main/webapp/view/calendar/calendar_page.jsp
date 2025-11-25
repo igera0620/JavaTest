@@ -39,10 +39,10 @@
   <jsp:include page="/common/calendar.jsp" />
 
   <div class="calendar-buttons">
-    <form action="<%= request.getContextPath() %>/TaskCreateEngine" method="get">
+    <form action="<%= request.getContextPath() %>/TaskCreateServlet" method="get">
       <input type="submit" value="タスク登録画面へ" id="btn">
     </form>
-    <form action="<%= request.getContextPath() %>/TaskListEngine" method="get">
+    <form action="<%= request.getContextPath() %>/TaskListServlet" method="get">
       <input type="submit" value="タスク一覧へ" id="btn">
     </form>
     <form action="<%= request.getContextPath() %>/view/index.jsp" method="get">

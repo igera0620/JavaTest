@@ -106,12 +106,12 @@
 
       <!-- 編集・削除ボタン -->
       <div class="action-buttons mt-20">
-        <form action="<%= request.getContextPath() %>/TaskEditEngine" method="get">
+        <form action="<%= request.getContextPath() %>/TaskEditServlet" method="get">
           <input type="hidden" name="id" value="<%= task.getId() %>">
           <input type="submit" value="編集" class="btn">
         </form>
 
-        <form action="<%= request.getContextPath() %>/TaskDeleteEngine" method="post"
+        <form action="<%= request.getContextPath() %>/TaskDeleteServlet" method="post"
               onsubmit="return confirm('本当に削除しますか？');">
           <input type="hidden" name="id" value="<%= task.getId() %>">
           <input type="submit" value="削除" class="danger_btn">
@@ -120,7 +120,7 @@
 
       <!-- カレンダーへ戻る -->
       <div class="page-buttons mt-25">
-        <form action="<%= request.getContextPath() %>/CalendarEngine" method="get">
+        <form action="<%= request.getContextPath() %>/CalendarServlet" method="get">
           <input type="submit" value="カレンダー画面へ" id="btn">
         </form>
       </div>

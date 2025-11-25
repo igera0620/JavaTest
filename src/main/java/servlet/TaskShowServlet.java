@@ -36,7 +36,7 @@ public class TaskShowServlet extends HttpServlet {
         String idStr = request.getParameter("id");
         if (idStr == null || idStr.isEmpty()) {
             // id が無ければカレンダーに戻す
-            response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+            response.sendRedirect(request.getContextPath() + "/CalendarServlet");
             return;
         }
 
@@ -48,13 +48,13 @@ public class TaskShowServlet extends HttpServlet {
         
         if (task == null) {
             session.setAttribute("error", "指定されたタスクの表示に失敗しました。再度お試しください。");
-            response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+            response.sendRedirect(request.getContextPath() + "/CalendarServlet");
             return;
         }
 
         // JSP へ渡す
         request.setAttribute("task", task);
-        request.getRequestDispatcher("/view/show_task.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/task/show_task.jsp").forward(request, response);
     }
 
 	/**

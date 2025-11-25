@@ -46,6 +46,6 @@ public class LogoutServlet extends HttpServlet {
 	        // ログイン画面へ戻る
 	        HttpSession session2 = request.getSession(); // 新しいセッションを作成
 	        session2.setAttribute("logoutMessage", "ログアウトしました"); // ログアウトメッセージを保存
-	        response.sendRedirect(request.getContextPath() + "/view/login.jsp"); // ログイン画面へリダイレクト
+	        response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp"); // ログイン画面へリダイレクト
 	    }
 	}

@@ -6,8 +6,8 @@
     String iconFileName = null; // ユーザーアイコンのファイル名を格納する変数
 
     if (sessionObj != null) { // セッションが存在する場合
-        loginUserEmail = (String) sessionObj.getAttribute("loginUserEmail"); // ← LoginEngineで登録したキー
-        iconFileName = (String) sessionObj.getAttribute("userIcon"); // ← ProfileEngineで登録したキー
+        loginUserEmail = (String) sessionObj.getAttribute("loginUserEmail"); // ← LoginServletで登録したキー
+        iconFileName = (String) sessionObj.getAttribute("userIcon"); // ← ProfileServletで登録したキー
     }
 
     String iconPath; // ユーザーアイコンのパスを格納する変数
@@ -21,10 +21,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"> <!-- pageはUTF-8で記述 -->
-<title>ログイン画面</title> <!-- ページタイトル -->
-<link rel="stylesheet" href="../css/style.css"> <!-- 外部CSSファイルのリンク -->
-<link rel="stylesheet" href="../css/usericon.css"> <!-- ユーザーアイコン用の外部CSSファイルのリンク -->
+	<meta charset="UTF-8"> <!-- pageはUTF-8で記述 -->
+	<title>ログイン画面</title> <!-- ページタイトル -->
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/usericon.css">
 </head>
 
 <body>
@@ -52,7 +52,7 @@
 	 
 	<h1>ログイン画面</h1>
 
-  <form action="<%= request.getContextPath() %>/LoginEngine" method="post"> <!-- フォームの送信先とメソッドを指定 -->
+  <form action="<%= request.getContextPath() %>/LoginServlet" method="post"> <!-- フォームの送信先とメソッドを指定 -->
     <label for="email">メールアドレス</label> <!-- ラベルと入力フィールドを関連付ける -->
     <input type="email" name="email" id="email" required> <!-- ユーザIDの入力フィールド -->
     <label for="password">パスワード</label>
@@ -68,7 +68,7 @@
   </p>
   
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="../js/main.js"></script>
+  <script src="<%= request.getContextPath() %>/js/main.js"></script>
   </main>
  <jsp:include page="/common/footer.jsp" />
 </body>

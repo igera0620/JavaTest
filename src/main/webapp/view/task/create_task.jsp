@@ -52,7 +52,7 @@
 		  session.removeAttribute("input_content");
 	 %>
 
-    <form action="<%= request.getContextPath() %>/TaskCreateEngine" method="post">
+    <form action="<%= request.getContextPath() %>/TaskCreateServlet" method="post">
 
 	  <!-- 開始日 -->
 	  <label for="task_date_start">開始日</label>
@@ -108,7 +108,7 @@
 	  <input type="submit" value="登録" id="btn">
 	</form>
 	
-	<p><a href="<%= request.getContextPath() %>/CalendarEngine">カレンダーに戻る</a></p>
+	<p><a href="<%= request.getContextPath() %>/CalendarServlet">カレンダーに戻る</a></p>
   </main>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

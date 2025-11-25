@@ -35,7 +35,7 @@ public class TaskEditServlet extends HttpServlet {
 		 // パラメータ取得
         String idStr = request.getParameter("id");
         if (idStr == null || idStr.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+            response.sendRedirect(request.getContextPath() + "/CalendarServlet");
             return;
         }
 
@@ -46,7 +46,7 @@ public class TaskEditServlet extends HttpServlet {
         Task task = logic.getTaskById(id);
         if (task == null) {
             // 該当タスクがなければカレンダーへ戻す
-            response.sendRedirect(request.getContextPath() + "/CalendarEngine");
+            response.sendRedirect(request.getContextPath() + "/CalendarServlet");
             return;
         }
         
@@ -55,7 +55,7 @@ public class TaskEditServlet extends HttpServlet {
 
         // JSPに渡す
         request.setAttribute("task", task);
-        request.getRequestDispatcher("/view/edit_task.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/task/edit_task.jsp").forward(request, response);
     }
 
 	/**

@@ -30,7 +30,7 @@
 
     <h1>タスク編集</h1>
 
-    <form action="<%= request.getContextPath() %>/TaskUpdateEngine" method="post">
+    <form action="<%= request.getContextPath() %>/TaskUpdateServlet" method="post">
 
       <!-- 更新対象ID -->
       <input type="hidden" name="id" value="<%= idStr %>">
@@ -126,7 +126,7 @@
 
     </form>
 
-    <p><a href="<%= request.getContextPath() %>/CalendarEngine">カレンダーに戻る</a></p>
+    <p><a href="<%= request.getContextPath() %>/CalendarServlet">カレンダーに戻る</a></p>
 
   </main>
 

@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("ymForm");
 
     // contextPath を JSP から渡す（必要なので）
-    const contextPath = form.getAttribute("action").replace("/CalendarEngine", "");
+    const contextPath = form.getAttribute("action").replace("/CalendarServlet", "");
 
     // ① span をクリック → セレクト表示
     monthDisplay.addEventListener("click", () => {

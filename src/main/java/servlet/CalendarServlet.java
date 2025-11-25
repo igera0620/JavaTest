@@ -65,7 +65,7 @@ public class CalendarServlet extends HttpServlet {
 	        request.setAttribute("year", year); // 年をリクエスト属性に設定
 	        request.setAttribute("month", month); // 月をリクエスト属性に設定
 
-	        request.getRequestDispatcher("/view/calendar_page.jsp").forward(request, response); // カレンダーページにフォワード
+	        request.getRequestDispatcher("/view/calendar/calendar_page.jsp").forward(request, response); // カレンダーページにフォワード
 	    }
 
 	/**

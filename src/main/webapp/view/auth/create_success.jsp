@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>アカウント作成成功</title>
-<link rel="stylesheet" href="../css/style.css">
+	<meta charset="UTF-8">
+	<title>アカウント作成成功</title>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/usericon.css">
 <!-- 共通CSS -->
 </head>
 <body>
@@ -19,6 +20,8 @@
 			<input type="submit" value="ログイン画面へ">
 		</form>
 	</main>
-<jsp:include page="/common/footer.jsp" />
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  	<script src="<%= request.getContextPath() %>/js/main.js"></script>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>

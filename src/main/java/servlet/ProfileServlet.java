@@ -58,7 +58,7 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("profile", profile);
 
         // profile.jsp に転送（ビューを表示）
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/profile.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/profile/profile.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -114,9 +114,9 @@ public class ProfileServlet extends HttpServlet {
 				session.setAttribute("userIcon", iconFileName);
 			}
 
-			response.sendRedirect(request.getContextPath() + "/view/profile_success.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/profile/profile_success.jsp");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/view/profile_error.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/profile/profile_error.jsp");
 		}
 	}
 }
