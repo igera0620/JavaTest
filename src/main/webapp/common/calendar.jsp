@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="java.time.*, java.util.*, pack.Task"%>
+<%@ page import="java.time.*, java.util.*,model.Task"%>
 <%@ page import="java.time.temporal.ChronoUnit" %>
 
 <%

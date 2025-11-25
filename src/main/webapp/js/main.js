@@ -117,3 +117,23 @@ document.addEventListener("DOMContentLoaded", () => {
         monthDisplay.style.display = "inline";
     });
 });
+
+// タスク作成・編集ページの日付制御
+document.addEventListener("DOMContentLoaded", () => {
+  const startInput = document.getElementById("task_date_start");
+  const endInput   = document.getElementById("task_date_end");
+
+  if (!startInput || !endInput) return; // 他ページでエラー防止
+
+  if (startInput.value) {
+    endInput.min = startInput.value;
+  }
+
+  startInput.addEventListener("change", () => {
+    endInput.min = startInput.value;
+
+    if (endInput.value && endInput.value < startInput.value) {
+      endInput.value = startInput.value;
+    }
+  });
+});
