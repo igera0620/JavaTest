@@ -81,7 +81,7 @@ Java（Servlet / JSP）と MySQL を使って構築した
 | Web | Jakarta Servlet / JSP |
 | サーバー | Tomcat 10 |
 | DB | MySQL 8 |
-| ORM(自作) | DAO パターン |
+| データアクセス | DAO パターン（手書きSQL） |
 | フロント | HTML / CSS / JavaScript |
 | 環境 | Eclipse / WSL2 / Docker（任意） |
 | バージョン管理 | GitHub |
