@@ -16,7 +16,7 @@
 
 		<p>ご登録ありがとうございます。ログイン画面でログインしてサービスを利用してください！</p>
 
-		<form action="../view/login.jsp" method="get">
+		<form action="<%= request.getContextPath() %>/view/auth/login.jsp" method="get">
 			<input type="submit" value="ログイン画面へ">
 		</form>
 	</main>

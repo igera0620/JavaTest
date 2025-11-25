@@ -34,7 +34,7 @@
       <div id="userMenu">
         <p><strong><%= loginUserEmail %></strong></p>
         <a href="<%= request.getContextPath() %>/ProfileServlet">プロフィール編集</a>
-        <a href="<%= request.getContextPath() %>/view/setting/setting.jsp">設定</a>
+        <a href="<%= request.getContextPath() %>/SettingServlet">設定</a>
         <a href="<%= request.getContextPath() %>/LogoutServlet">ログアウト</a>
       </div>
     </div>

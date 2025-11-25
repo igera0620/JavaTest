@@ -15,7 +15,7 @@
 	
 		<p>ご登録ありがとうございます。<br>登録したプロフィール情報をもとに、マイページや各種機能をご利用いただけます。</p>
 	
-		<form action="../view/index.jsp" method="get">
+		<form action="<%= request.getContextPath() %>/view/index.jsp" method="get">
 			<input type="submit" value="ホーム画面へ戻る">
 		</form>
 		</main>

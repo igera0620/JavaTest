@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.User;
+
 public class SettingDao {
 
 	private static final String URL = "jdbc:mysql://127.0.0.1:3306/myapp_db?serverTimezone=Asia/Tokyo&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8";
@@ -72,6 +74,42 @@ public class SettingDao {
 
 	        return result;
 	    }
+	
+	// ユーザー情報を取得する処理
+	public User getUserInfo(int userId) {
+	    User user = null;
+
+	    String sql = "SELECT id, first_name, last_name, email, password, created_at, deleted_at, del_flg "
+	               + "FROM mst_users WHERE id = ? AND del_flg = 0";
+
+	    try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setInt(1, userId);
+	        ResultSet rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+	            user = new User();
+	            user.setId(rs.getInt("id"));
+	            user.setFirstName(rs.getString("first_name"));
+	            user.setLastName(rs.getString("last_name"));
+	            user.setEmail(rs.getString("email"));
+	            user.setPassword(rs.getString("password"));
+	            user.setCreatedAt(rs.getTimestamp("created_at"));
+
+	            var deletedAt = rs.getTimestamp("deleted_at");
+	            user.setDeletedAt(deletedAt != null ? deletedAt.toLocalDateTime() : null);
+
+	            user.setDelFlg(rs.getInt("del_flg"));
+	        }
+
+	    } catch (SQLException e) {
+	        System.out.println("❌ getUserInfoエラー：" + e.getMessage());
+	        e.printStackTrace();
+	    }
+
+	    return user;
+	}
 	
 	// 🔹 パスワードをSHA-256でハッシュ化
 	private String hashPassword(String password) {

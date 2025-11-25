@@ -64,7 +64,7 @@
   </form>
   
   <p>アカウントをお持ちでない方は
-    <a href="<%= request.getContextPath() %>/view/create.jsp">こちら</a>から作成できます。
+    <a href="<%= request.getContextPath() %>/view/auth/create.jsp">こちら</a>から作成できます。
   </p>
   
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

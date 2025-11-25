@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import dao.SettingDao;
+import model.User;
 
 /**
  * Servlet implementation class SettingEngine
@@ -31,8 +32,24 @@ public class SettingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		 HttpSession session = request.getSession(false);
+		    if (session == null || session.getAttribute("loginUserId") == null) {
+		        response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+		        return;
+		    }
+
+		    int userId = (int) session.getAttribute("loginUserId");
+
+		    SettingDao dao = new SettingDao();
+		    User user = dao.getUserInfo(userId);
+
+		    // フォームの初期値として session に保存
+		    session.setAttribute("input_last_name", user.getLastName());
+		    session.setAttribute("input_first_name", user.getFirstName());
+		    session.setAttribute("input_email", user.getEmail());
+
+		    request.getRequestDispatcher("/view/setting/setting.jsp").forward(request, response);
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,7 +69,7 @@ public class SettingServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginUserId") == null) {
 			// セッションが無い or ログインしてない
-			response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 			return;
 		}
 		int userId = (int) session.getAttribute("loginUserId");
@@ -60,7 +77,7 @@ public class SettingServlet extends HttpServlet {
 		// パスワード確認
 		if (!password.equals(passCheck)) {
 			request.setAttribute("error", "⚠️ パスワードが一致しません。");
-			request.getRequestDispatcher("/view/settings.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/setting/settings.jsp").forward(request, response);
 			return;
 		}
 

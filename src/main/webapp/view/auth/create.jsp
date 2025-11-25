@@ -36,7 +36,7 @@
     <% if (errorMsg != null) { %>
 	  <p style="color:red; font-weight:bold;"><%= errorMsg %></p>
 	<% } %>
-  <form action="<%= request.getContextPath() %>/CreateEngine" method="post">
+  <form action="<%= request.getContextPath() %>/CreateServlet" method="post">
 	  <label for="last_name">姓</label>
 	  <input type="text" name="last_name" id="last_name"
 	         value="<%= lastName != null ? lastName : "" %>"
