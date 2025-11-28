@@ -138,3 +138,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// ユーザーアイコン画像のファイル形式チェック
+document.getElementById("icon").addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    const name = file.name.toLowerCase();
+
+    const allowed = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp"];
+
+    const ok = allowed.some(ext => name.endsWith(ext));
+
+    if (!ok) {
+        alert("画像ファイル（jpg/png/gif/webp）のみ選択できます");
+        this.value = "";
+    }
+});

@@ -52,7 +52,7 @@
               
      <!-- アイコンアップロード欄 -->
     <label for="icon">アイコン画像</label>
-    <input type="file" name="icon" id="icon" accept=".png,.jpg,.jpeg,.gif,.webp">
+    <input type="file" name="icon" id="icon">
 
     <!-- 既存のアイコンがある場合に表示 -->
     <% if (profile != null && profile.getIcon() != null && !profile.getIcon().isEmpty()) { %> <!-- profileがnullでなく、かつiconがnullでなく空欄でない場合 -->
