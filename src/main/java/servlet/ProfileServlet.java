@@ -76,10 +76,17 @@ public class ProfileServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		String profileText = request.getParameter("profile_text");
+		
+		Profile inputProfile = new Profile();
+        inputProfile.setNickname(nickname);
+        inputProfile.setGender(gender);
+        inputProfile.setBirthDate(birthDate);
+        inputProfile.setPhone(phone);
+        inputProfile.setAddress(address);
+        inputProfile.setProfileText(profileText);
 
 		Part iconPart = request.getPart("icon"); //文字データではなく、バイナリデータが送られるためPartで受け取る
 		String iconFileName = null; // アップロードされたファイル名を取得
-		
 		
 		if (iconPart != null && iconPart.getSize() > 0) { // ファイルがアップロードされているか確認
 
@@ -87,6 +94,7 @@ public class ProfileServlet extends HttpServlet {
 	        String mime = iconPart.getContentType(); // アップロードされたファイルのMIMEタイプを取得
 	        if (mime == null || !mime.startsWith("image/")) { // MIMEタイプが画像で始まらない場合
 	            request.setAttribute("error", "画像ファイル以外はアップロードできません。"); // エラーメッセージをリクエストに設定
+	            request.setAttribute("profile", inputProfile); // 入力されたプロフィール情報をリクエストに設定
 	            request.getRequestDispatcher("/view/profile/profile.jsp").forward(request, response); // プロフィールページにフォワード
 	            return;
 	        }
@@ -108,7 +116,6 @@ public class ProfileServlet extends HttpServlet {
 		if (session != null && session.getAttribute("loginUserId") != null) { // // セッションが存在することを確認→ユーザーiDがセッションに保存されているか確認
 			userId = (int) session.getAttribute("loginUserId"); // ユーザーIDをセッションから取得
 		} else {
-			System.out.println("⚠️ ログイン情報がありません");
 			session.setAttribute("error", "ログイン情報がありません。再度ログインしてください。");
 			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 			return;
@@ -125,7 +132,8 @@ public class ProfileServlet extends HttpServlet {
 			}
 			response.sendRedirect(request.getContextPath() + "/view/profile/profile_success.jsp");
 		} else {
-			session.setAttribute("error", "プロフィールの保存中にエラーが発生しました。");
+			request.setAttribute("error", "プロフィールの保存中にエラーが発生しました。");
+			request.setAttribute("profile", inputProfile);
 			response.sendRedirect(request.getContextPath() + "/view/profile/profile.jsp");
 		}
 	}

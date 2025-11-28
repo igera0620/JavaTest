@@ -1,6 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="model.Profile" %>
-<% Profile profile = (Profile) request.getAttribute("profile"); %>
+<% 
+	Profile profile = (Profile) request.getAttribute("profile");
+	String errorMsg = (String) request.getAttribute("error");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +16,9 @@
 <body>
   <jsp:include page="/common/header.jsp" />
   <main class="profile-page">
+ 	 <% if (errorMsg != null) { %>
+	  	<p style="color:red; font-weight:bold;"><%= errorMsg %></p>
+	<% } %>
   <h1>プロフィール設定</h1>
 
   <form action="<%= request.getContextPath() %>/ProfileServlet" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data"はファイルアップロード用 -->
@@ -52,7 +58,7 @@
               
      <!-- アイコンアップロード欄 -->
     <label for="icon">アイコン画像</label>
-    <input type="file" name="icon" id="icon">
+    <input type="file" name="icon" id="icon"accept=".png,.jpg,.jpeg,.gif,.webp"> <!-- accept属性で許可するファイル形式を指定 -->
 
     <!-- 既存のアイコンがある場合に表示 -->
     <% if (profile != null && profile.getIcon() != null && !profile.getIcon().isEmpty()) { %> <!-- profileがnullでなく、かつiconがnullでなく空欄でない場合 -->
