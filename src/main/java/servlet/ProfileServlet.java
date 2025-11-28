@@ -79,20 +79,29 @@ public class ProfileServlet extends HttpServlet {
 
 		Part iconPart = request.getPart("icon"); //文字データではなく、バイナリデータが送られるためPartで受け取る
 		String iconFileName = null; // アップロードされたファイル名を取得
-
+		
+		
 		if (iconPart != null && iconPart.getSize() > 0) { // ファイルがアップロードされているか確認
-			// ファイル名を取得
-			iconFileName = Paths.get(iconPart.getSubmittedFileName()).getFileName().toString(); //ブラウザが送信したファイル名を取得して、getFileName()でパスを除去。toString()で文字列に変換。
 
-			// 保存先ディレクトリを指定（プロジェクト内の /uploads フォルダ）
-			String uploadDir = getServletContext().getRealPath("/uploads"); //保存するフォルダの「実際のパス」を取得
-			File uploadDirFile = new File(uploadDir); //Fileオブジェクトを作成
-			if (!uploadDirFile.exists()) // フォルダが存在しない場合は作成
-				uploadDirFile.mkdirs(); //複数階層のディレクトリも作成可能
+	        // MIMEチェック（画像以外は拒否）
+	        String mime = iconPart.getContentType(); // アップロードされたファイルのMIMEタイプを取得
+	        if (mime == null || !mime.startsWith("image/")) { // MIMEタイプが画像で始まらない場合
+	            request.setAttribute("error", "画像ファイル以外はアップロードできません。"); // エラーメッセージをリクエストに設定
+	            request.getRequestDispatcher("/view/profile/profile.jsp").forward(request, response); // プロフィールページにフォワード
+	            return;
+	        }
 
-			// ファイルを保存
-			iconPart.write(uploadDir + File.separator + iconFileName); //受け取った画像ファイルをサーバーの指定フォルダに保存する
-		}
+	        // アップロードファイル名取得
+	        iconFileName = Paths.get(iconPart.getSubmittedFileName()).getFileName().toString(); // ブラウザによってはフルパスで送信されることがあるため、ファイル名のみを抽出
+
+	        // 保存先フォルダ作成
+	        String uploadDir = getServletContext().getRealPath("/uploads"); // アップロード先のディレクトリパスを取得
+	        File uploadDirFile = new File(uploadDir); // Fileオブジェクトを作成
+	        if (!uploadDirFile.exists()) uploadDirFile.mkdirs(); // ディレクトリが存在しない場合は作成
+
+	        // ファイル保存
+	        iconPart.write(uploadDir + File.separator + iconFileName); // ファイルを指定のディレクトリに保存
+	    }
 
 		HttpSession session = request.getSession(false); // 既存のセッションを取得
 		int userId = 0; // デフォルト値
@@ -100,7 +109,8 @@ public class ProfileServlet extends HttpServlet {
 			userId = (int) session.getAttribute("loginUserId"); // ユーザーIDをセッションから取得
 		} else {
 			System.out.println("⚠️ ログイン情報がありません");
-			response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+			session.setAttribute("error", "ログイン情報がありません。再度ログインしてください。");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
 			return;
 		}
 
@@ -113,10 +123,10 @@ public class ProfileServlet extends HttpServlet {
 			if (iconFileName != null && !iconFileName.isEmpty()) {
 				session.setAttribute("userIcon", iconFileName);
 			}
-
 			response.sendRedirect(request.getContextPath() + "/view/profile/profile_success.jsp");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/view/profile/profile_error.jsp");
+			session.setAttribute("error", "プロフィールの保存中にエラーが発生しました。");
+			response.sendRedirect(request.getContextPath() + "/view/profile/profile.jsp");
 		}
 	}
 }

@@ -43,7 +43,7 @@ public class DeleteServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loginUserEmail") == null) {
             // 未ログインならログイン画面へ
-            response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
             return;
         }
 
@@ -58,11 +58,11 @@ public class DeleteServlet extends HttpServlet {
             session.invalidate();
 
             // 完了画面にリダイレクト
-            response.sendRedirect(request.getContextPath() + "/view/delete_success.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/auth/delete_success.jsp");
         } else {
             // 失敗時
             session.setAttribute("error", "削除処理中にエラーが発生しました。");
-            response.sendRedirect(request.getContextPath() + "/view/setting.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/setting/setting.jsp");
         }
     }
 }

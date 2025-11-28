@@ -1,4 +1,15 @@
 $(function() {
+	// メールアドレス形式チェック（ここに追加）
+	    const email = document.getElementById("email");
+	    const emailRegex = /^[A-Za-z0-9._]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+	    email.addEventListener("input", () => {
+	        if (!emailRegex.test(email.value)) {
+	            email.setCustomValidity("正しいメールアドレス形式で入力してください");
+	        } else {
+	            email.setCustomValidity("");
+	        }
+	    });
 
 	//パスワード表示切り替え
 	$('#passshow').on('click', () => {
@@ -13,7 +24,7 @@ $(function() {
 
 	function validatePasswordMatch() {
 		if (password.value !== passCheck.value) {
-			passCheck.setCustomValidity("パスワードが一致していません。");
+			passCheck.setCustomValidity("パスワードが一致していません");
 		} else {
 			passCheck.setCustomValidity("");
 		}
@@ -51,16 +62,6 @@ document.addEventListener("DOMContentLoaded", function() { // HTMLの読み込�
 
 		// max属性に今日の日付をセット
 		birthInput.max = formattedDate;
-	}
-});
-
-document.querySelector("form").addEventListener("submit", function(e) { // フォームが送信されるときに実行
-	const pass = document.getElementById("password").value; // パスワードの値を取得
-	const passCheck = document.getElementById("pass_check").value; // パスワード確認の値を取得
-
-	if (pass !== passCheck) { // パスワードと確認が一致しない場合
-		alert("⚠️ パスワードが一致していません。"); // 警告メッセージを表示
-		e.preventDefault(); // フォーム送信を止める
 	}
 });
 

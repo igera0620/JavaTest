@@ -57,8 +57,8 @@
 	  <input type="email" name="email" id="email"
 		     value="<%= email != null ? email : "" %>"
 		     required
-		     pattern="^\S+$"
-		     title="スペースを含めないでください"
+		     pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+		     title="正しいメールアドレス形式で入力してください"
 		     maxlength="50">
 	
 	  <label for="pass">パスワード</label>
@@ -72,7 +72,7 @@
 	  <input type="submit" value="アカウント作成" id="btn">
   </form>
   
-  <p>すでにアカウントをお持ちですか？ <a href="../view/index.jsp">ログインはこちら</a></p>
+  <p>すでにアカウントをお持ちですか？ <a href="<%= request.getContextPath() %>/view/auth/login.jsp">ログインはこちら</a></p>
   </main>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

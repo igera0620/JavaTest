@@ -44,7 +44,7 @@
     <label for="address">住所</label>
     <input type="text" name="address" id="address"
            value="<%= profile != null ? profile.getAddress() : "" %>"
-           maxlength="255" placeholder="例：東京都新宿区...">
+           maxlength="100" placeholder="例：東京都新宿区...">
 
     <label for="profile_text">自己紹介</label>
     <textarea name="profile_text" id="profile_text" rows="4" maxlength="300"
@@ -52,7 +52,7 @@
               
      <!-- アイコンアップロード欄 -->
     <label for="icon">アイコン画像</label>
-    <input type="file" name="icon" id="icon" accept="image/*">
+    <input type="file" name="icon" id="icon" accept=".png,.jpg,.jpeg,.gif,.webp">
 
     <!-- 既存のアイコンがある場合に表示 -->
     <% if (profile != null && profile.getIcon() != null && !profile.getIcon().isEmpty()) { %> <!-- profileがnullでなく、かつiconがnullでなく空欄でない場合 -->
@@ -61,7 +61,7 @@
            alt="プロフィールアイコン" width="100">  <!-- アップロードされた画像を表示 -->
     <% } %>
 
-    <input type="submit" value="プロフィールを保存" id="btn">
+    <input type="submit" value="プロフィール保存" id="btn">
   </form>
 
  <p><a href="<%= request.getContextPath() %>/view/index.jsp">スキップして後で設定する</a></p>
