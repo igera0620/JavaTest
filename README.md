@@ -128,7 +128,7 @@ Java（Servlet / JSP）と MySQL を使って構築した
 | DB | MySQL 8 |
 | データアクセス | DAO パターン（手書きSQL） |
 | フロント | HTML / CSS / JavaScript |
-| 環境 | Eclipse / WSL2 / Docker（任意） |
+| 環境 | Eclipse / WSL2 / Docker |
 | バージョン管理 | GitHub |
 
 ---
