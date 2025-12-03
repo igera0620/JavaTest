@@ -41,7 +41,7 @@ public class TaskCreateServlet extends HttpServlet {
         Integer userId = (Integer) session.getAttribute("loginUserId");
         if (userId == null) {
             session.setAttribute("error", "ログインセッションが切れています。再ログインしてください。");
-            response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
             return;
         }
 
