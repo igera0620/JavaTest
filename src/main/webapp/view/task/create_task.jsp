@@ -58,7 +58,7 @@
 	  <label for="task_date_start">開始日</label>
 	  <input type="date" name="task_date_start" id="task_date_start"
 	         value="<%= inputStartDate != null ? inputStartDate : "" %>"
-	         >
+	         required>
 	
 	  <!-- 終了日 -->
 	  <label for="task_date_end">終了日</label>
@@ -69,7 +69,7 @@
 	  <label for="start_time">開始時間</label>
 	  <input type="time" name="start_time" id="start_time"
 	         value="<%= inputStartTime != null ? inputStartTime : "" %>"
-	         >
+	         required>
 	
 	  <!-- 終了時間 -->
 	  <label for="end_time">終了時間</label>
@@ -80,7 +80,7 @@
 	  <label for="title">タイトル</label>
 	  <input type="text" name="title" id="title" 
 	         value="<%= inputTitle != null ? inputTitle : "" %>"
-	         maxlength="30">
+	         required maxlength="30">
 	
 	  <!-- 内容 -->
 	  <label for="content">内容</label>
