@@ -68,7 +68,8 @@
 	  <!-- 開始時間 -->
 	  <label for="start_time">開始時間</label>
 	  <input type="time" name="start_time" id="start_time"
-	         value="<%= inputStartTime != null ? inputStartTime : "" %>">
+	         value="<%= inputStartTime != null ? inputStartTime : "" %>"
+	         required>
 	
 	  <!-- 終了時間 -->
 	  <label for="end_time">終了時間</label>
@@ -79,7 +80,7 @@
 	  <label for="title">タイトル</label>
 	  <input type="text" name="title" id="title" 
 	         value="<%= inputTitle != null ? inputTitle : "" %>"
-	         required maxlength="50">
+	         required maxlength="30">
 	
 	  <!-- 内容 -->
 	  <label for="content">内容</label>

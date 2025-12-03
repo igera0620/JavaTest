@@ -111,7 +111,7 @@ public class ProfileServlet extends HttpServlet {
 	        iconPart.write(uploadDir + File.separator + iconFileName); // ファイルを指定のディレクトリに保存
 	    }
 
-		HttpSession session = request.getSession(false); // 既存のセッションを取得
+		HttpSession session = request.getSession(); // 既存のセッションを取得
 		int userId = 0; // デフォルト値
 		if (session != null && session.getAttribute("loginUserId") != null) { // // セッションが存在することを確認→ユーザーiDがセッションに保存されているか確認
 			userId = (int) session.getAttribute("loginUserId"); // ユーザーIDをセッションから取得

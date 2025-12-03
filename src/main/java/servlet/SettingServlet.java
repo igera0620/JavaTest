@@ -9,9 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import model.User;
-
 import dao.SettingDao;
+import model.User;
 
 /**
  * Servlet implementation class SettingEngine
@@ -67,12 +66,13 @@ public class SettingServlet extends HttpServlet {
 		String passCheck = request.getParameter("pass_check");
 
 		// セッションからユーザーIDを取得
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("loginUserId") == null) {
-			// セッションが無い or ログインしてない
-			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
-			return;
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUserId") == null) {
+		    session.setAttribute("error", "ログインセッションが切れています。再ログインしてください。");
+		    response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
+		    return;
 		}
+		
 		int userId = (int) session.getAttribute("loginUserId");
 
 		// パスワード確認
