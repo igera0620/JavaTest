@@ -93,11 +93,12 @@ public class TaskCreateServlet extends HttpServlet {
 
 	    // --- バリデーション ---
 	    if (startDateStr == null || startDateStr.isEmpty() ||
-	        title == null || title.isEmpty()) {
+	    	startTimeStr == null || startTimeStr.isEmpty() ||
+	    	title == null || title.isEmpty()) {
 
-	        session.setAttribute("error", "開始日・タイトルは必須です。");
-	        response.sendRedirect(request.getContextPath() + "/view/task/create_task.jsp");
-	        return;
+	    	 session.setAttribute("error", "開始日・開始時間・タイトルは必須です。");
+	    	 response.sendRedirect(request.getContextPath() + "/view/task/create_task.jsp");
+	    	 return;
 	    }
 
 	    // LocalDate 変換
