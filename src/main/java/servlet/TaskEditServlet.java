@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import dao.TaskDao;
 import model.Task;
@@ -32,6 +33,15 @@ public class TaskEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
+		if (session == null || session.getAttribute("loginUserId") == null) {
+			
+			request.getSession().setAttribute("error", "ログインセッションが切れています。再ログインしてください。");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
+			return;
+		}
+		
 		 // パラメータ取得
         String idStr = request.getParameter("id");
         if (idStr == null || idStr.isEmpty()) {

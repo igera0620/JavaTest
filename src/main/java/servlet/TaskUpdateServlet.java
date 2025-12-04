@@ -41,9 +41,17 @@ public class TaskUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+
+		if (session == null || session.getAttribute("loginUserId") == null) {
+			
+			request.getSession().setAttribute("error", "ログインセッションが切れています。再ログインしてください。");
+			response.sendRedirect(request.getContextPath() + "/view/auth/login.jsp");
+			return;
+		}
 
         // パラメータ取得
-        int id = Integer.parseInt(request.getParameter("id"));
+        String idStr = request.getParameter("id");
         String startDateStr = request.getParameter("start_date");
         String endDateStr   = request.getParameter("end_date");
         String startTimeStr = request.getParameter("start_time");
@@ -54,9 +62,23 @@ public class TaskUpdateServlet extends HttpServlet {
         Integer categoryId = (categoryIdStr != null && !categoryIdStr.isEmpty())
                                      ? Integer.parseInt(categoryIdStr) : null;
         String priorityStr= request.getParameter("priority");
+        
+        int id = Integer.parseInt(request.getParameter("id"));
         int priority = (priorityStr != null && !priorityStr.isEmpty())
 		                ? Integer.parseInt(priorityStr)
 		                : 3;
+        
+        if (idStr == null || idStr.isEmpty() ||
+                startDateStr == null || startDateStr.isEmpty() ||
+                startTimeStr == null || startTimeStr.isEmpty() ||
+                title == null || title.isEmpty()) {
+
+                session.setAttribute("error", "開始日・開始時間・タイトルは必須です。");
+                // 編集画面に戻す場合（Servlet 経由）
+                response.sendRedirect(request.getContextPath() + "/TaskEditServlet?id=" + idStr);
+                return;
+            }
+
         // 値をTaskに詰める
         Task task = new Task();
         task.setId(id);
@@ -83,14 +105,12 @@ public class TaskUpdateServlet extends HttpServlet {
 
         if (isUpdated) {
             // ✅ セッションに成功メッセージを保存
-            HttpSession session = request.getSession();
             session.setAttribute("message", "タスクを更新しました。");
 
             // カレンダー画面へ戻る
             response.sendRedirect(request.getContextPath() + "/CalendarServlet");
         } else {
             // 失敗時
-        	HttpSession session = request.getSession();
         	session.setAttribute("error", "更新に失敗しました。");
         	response.sendRedirect(request.getContextPath() + "/TaskEditServlet?id=" + id);
         }

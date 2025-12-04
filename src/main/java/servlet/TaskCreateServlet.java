@@ -121,8 +121,7 @@ public class TaskCreateServlet extends HttpServlet {
 	    if (endTimeStr != null && !endTimeStr.isEmpty()) {
 	        endTime = LocalTime.parse(endTimeStr);
 	    }
-
-	    // categoryId・priority
+	    // カテゴリID 変換
 	    Integer categoryId = null;
 	    if (categoryIdStr != null && !categoryIdStr.isEmpty()) {
 	        categoryId = Integer.parseInt(categoryIdStr);
