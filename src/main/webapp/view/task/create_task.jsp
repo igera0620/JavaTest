@@ -11,7 +11,7 @@
 <body>
   <jsp:include page="/common/header.jsp" />
 
-  <main>
+  <main class="task-list-page">
     <h1>タスク登録</h1>
 
     <!-- メッセージ表示 -->
