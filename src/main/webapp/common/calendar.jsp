@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="java.time.*, java.util.*, pack.Task"%>
+<%@ page import="java.time.*, java.util.*,model.Task"%>
 <%@ page import="java.time.temporal.ChronoUnit" %>
 
 <%
@@ -106,7 +106,7 @@ for (LocalDate[] week : weeks) {
 <!-- ナビ -->
 <div class="calendar-nav">
     <a class="nav-arrow"
-       href="<%=request.getContextPath()%>/CalendarEngine?year=<%=prevMonth.getYear()%>&month=<%=prevMonth.getMonthValue()%>">&lt;</a>
+       href="<%=request.getContextPath()%>/CalendarServlet?year=<%=prevMonth.getYear()%>&month=<%=prevMonth.getMonthValue()%>">&lt;</a>
 
     <span id="monthDisplay" class="month-display"><%=year%>年 <%=month%>月</span>
 
@@ -119,10 +119,10 @@ for (LocalDate[] week : weeks) {
         <% }} %>
     </select>
 
-    <form id="ymForm" method="get" action="<%=request.getContextPath()%>/CalendarEngine"></form>
+    <form id="ymForm" method="get" action="<%=request.getContextPath()%>/CalendarServlet"></form>
 
     <a class="nav-arrow"
-       href="<%=request.getContextPath()%>/CalendarEngine?year=<%=nextMonth.getYear()%>&month=<%=nextMonth.getMonthValue()%>">&gt;</a>
+       href="<%=request.getContextPath()%>/CalendarServlet?year=<%=nextMonth.getYear()%>&month=<%=nextMonth.getMonthValue()%>">&gt;</a>
 </div>
 
 <!-- カレンダー本体 -->
@@ -186,7 +186,7 @@ for (LocalDate[] week : weeks) {
 		            out.println("<td colspan='"+ts.span+"' class='task-cell'>"); // タスクセル開始（colspanで横幅指定）
 		            out.println("<div class='task-bar' style='--tagColor:"+color+";'>"); // タスクバー開始（CSS変数でタグカラー指定）
 		            out.println("<span class='priority-dot "+dotClass+"'></span>"); // 優先度ドット出力
-		            out.println("<a href='"+request.getContextPath()+"/TaskShowEngine?id="+t.getId()+"'>"); // タスク詳細リンク開始
+		            out.println("<a href='"+request.getContextPath()+"/TaskShowServlet?id="+t.getId()+"'>"); // タスク詳細リンク開始
 		            out.println(time+" "+t.getTitle()); // タスクタイトル出力
 		            out.println("</a>"); // タスク詳細リンク終了
 		            out.println("<span class='task-tag' style='background:"+color+";'>"+tag+"</span>"); // タグ表示

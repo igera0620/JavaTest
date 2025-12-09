@@ -32,13 +32,13 @@
    <main>
     <% if (loginUserEmail != null) { %>
       <h1>カレンダーで現在のタスクを確認しよう！</h1>
-        <form action="<%= request.getContextPath() %>/CalendarEngine" method="get">
+        <form action="<%= request.getContextPath() %>/CalendarServlet" method="get">
           <input type="submit" value="カレンダー画面へ" id="btn">
         </form>
     <% } else { %>
       <h1>ようこそ ゲスト さん！</h1>
       <p>ログインしていません。</p>
-      <form action="<%= request.getContextPath() %>/view/login.jsp" method="get">
+      <form action="<%= request.getContextPath() %>/view/auth/login.jsp" method="get">
         <input type="submit" value="ログイン画面へ" id="btn">
       </form>
     <% } %>
