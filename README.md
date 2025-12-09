@@ -126,7 +126,7 @@ Java（Servlet / JSP）と MySQL を使って構築した
 | Web | Jakarta Servlet / JSP |
 | サーバー | Tomcat 10 |
 | DB | MySQL 8 |
-| データアクセス | DAO パターン（手書きSQL） |
+| データアクセス | JDBC（DAOパターン／手書きSQL） |
 | フロント | HTML / CSS / JavaScript |
 | 環境 | Eclipse / WSL2 / Docker |
 | バージョン管理 | GitHub |
