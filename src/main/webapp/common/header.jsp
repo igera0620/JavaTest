@@ -24,7 +24,7 @@
 
 <header class="site-header">
   <div class="header-left">
-    <h1><a href="<%= request.getContextPath() %>/view/index.jsp">ユニサーブ</a></h1>
+    <h1><a href="<%= request.getContextPath() %>/view/index.jsp">タスク管理</a></h1>
   </div>
 
   <% if (loginUserEmail != null) { %>

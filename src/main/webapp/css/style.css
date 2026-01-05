@@ -474,3 +474,22 @@ a:hover {
     letter-spacing: 0.5px;  /* 少しだけ文字間を広げる */
     margin-top: 4px;
 }
+
+.priority-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%; /* 丸 */
+}
+
+.priority-icon.high {
+  background-color: #d32f2f; /* 赤 */
+}
+
+.priority-icon.middle {
+  background-color: #f9a825; /* 黄 */
+}
+
+.priority-icon.low {
+  background-color: #388e3c; /* 緑 */
+}

@@ -80,18 +80,20 @@
 
           <!-- ▼ 優先度 -->
           <tr>
-            <th>優先度</th>
-            <td>
-              <%
-                int p = task.getPriority();
-                String icon =
-                    (p == 1) ? "🔴 高" :
-                    (p == 2) ? "🟡 中" :
-                               "🟢 低";
-              %>
-              <%= icon %>
-            </td>
-          </tr>
+			  <th>優先度</th>
+			  <td>
+			    <%
+			      int p = task.getPriority();
+			
+			      String cls =
+			          (p == 1) ? "priority-icon high" :
+			          (p == 2) ? "priority-icon middle" :
+			                     "priority-icon low";
+			    %>
+			
+			    <span class="<%= cls %>"></span>
+			  </td>
+		  </tr>
 
           <!-- ▼ 内容 -->
           <tr>

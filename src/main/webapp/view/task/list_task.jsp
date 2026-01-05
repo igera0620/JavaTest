@@ -87,15 +87,15 @@
               <td><%= t.getContent() %></td>
 
               <td>
-                <%
-                  int p = t.getPriority();
-                  String icon =
-                      (p == 1) ? "🔴 " :
-                      (p == 2) ? "🟡 " :
-                                 "🟢 ";
-                %>
-                <%= icon %>
-              </td>
+				  <%
+				    int p = t.getPriority();
+				    String cls =
+				        (p == 1) ? "priority-icon high" :
+				        (p == 2) ? "priority-icon middle" :
+				                   "priority-icon low";
+				  %>
+				  <span class="<%= cls %>"></span>
+			  </td>
 
               <td>
                 <div class="action-buttons">
