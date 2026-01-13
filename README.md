@@ -142,5 +142,6 @@ Java（Servlet / JSP）と MySQL を使って構築した
 - **mst_task_categories** – タスクカテゴリマスタ  
 - **trn_tasks** – タスク本体（カテゴリ、日付など）
 
-<img width="500" src="https://i.gyazo.com/af4319e2fc99dfec3faa67808d812be0.png" alt="Gyazo image" />
+<img width="500" src="https://i.gyazo.com/0479c8bd15b51e6b0a18ef62768603be.png" alt="Gyazo image" />
+
 
