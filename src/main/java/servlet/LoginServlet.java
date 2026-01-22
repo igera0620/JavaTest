@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) // form actionで送信ボタンを押した際に呼び出し
 			throws ServletException, IOException {
 
-
 		// フォームから送られてきた値を取得
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
