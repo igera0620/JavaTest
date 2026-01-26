@@ -58,8 +58,7 @@ create table trn_tasks (
   content text default null,                                    -- タスク内容
 
   created_at timestamp default current_timestamp,               -- 作成日時
-  updated_at timestamp default current_timestamp 
-              on update current_timestamp,                      -- 更新日時
+  updated_at timestamp default current_timestamp  on update current_timestamp,                      -- 更新日時
   deleted_at datetime default null,                             -- 論理削除日時
   del_flg tinyint default 0,                                    -- 削除フラグ（0=有効 / 1=削除済）
 

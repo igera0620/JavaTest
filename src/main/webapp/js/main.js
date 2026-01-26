@@ -1,4 +1,15 @@
 $(function() {
+	// メールアドレス形式チェック（ここに追加）
+	    const email = document.getElementById("email");
+	    const emailRegex = /^[A-Za-z0-9._]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+	    email.addEventListener("input", () => {
+	        if (!emailRegex.test(email.value)) {
+	            email.setCustomValidity("正しいメールアドレス形式で入力してください");
+	        } else {
+	            email.setCustomValidity("");
+	        }
+	    });
 
 	//パスワード表示切り替え
 	$('#passshow').on('click', () => {
@@ -13,7 +24,7 @@ $(function() {
 
 	function validatePasswordMatch() {
 		if (password.value !== passCheck.value) {
-			passCheck.setCustomValidity("パスワードが一致していません。");
+			passCheck.setCustomValidity("パスワードが一致していません");
 		} else {
 			passCheck.setCustomValidity("");
 		}
@@ -54,16 +65,6 @@ document.addEventListener("DOMContentLoaded", function() { // HTMLの読み込�
 	}
 });
 
-document.querySelector("form").addEventListener("submit", function(e) { // フォームが送信されるときに実行
-	const pass = document.getElementById("password").value; // パスワードの値を取得
-	const passCheck = document.getElementById("pass_check").value; // パスワード確認の値を取得
-
-	if (pass !== passCheck) { // パスワードと確認が一致しない場合
-		alert("⚠️ パスワードが一致していません。"); // 警告メッセージを表示
-		e.preventDefault(); // フォーム送信を止める
-	}
-});
-
 document.addEventListener("DOMContentLoaded", () => {
 	const calendar = document.querySelector(".calendar");
 	const main = document.querySelector("main");
@@ -90,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("ymForm");
 
     // contextPath を JSP から渡す（必要なので）
-    const contextPath = form.getAttribute("action").replace("/CalendarEngine", "");
+    const contextPath = form.getAttribute("action").replace("/CalendarServlet", "");
 
     // ① span をクリック → セレクト表示
     monthDisplay.addEventListener("click", () => {
@@ -116,4 +117,41 @@ document.addEventListener("DOMContentLoaded", () => {
         select.style.display = "none";
         monthDisplay.style.display = "inline";
     });
+});
+
+// タスク作成・編集ページの日付制御
+document.addEventListener("DOMContentLoaded", () => {
+  const startInput = document.getElementById("task_date_start");
+  const endInput   = document.getElementById("task_date_end");
+
+  if (!startInput || !endInput) return; // 他ページでエラー防止
+
+  if (startInput.value) {
+    endInput.min = startInput.value;
+  }
+
+  startInput.addEventListener("change", () => {
+    endInput.min = startInput.value;
+
+    if (endInput.value && endInput.value < startInput.value) {
+      endInput.value = startInput.value;
+    }
+  });
+});
+
+// ユーザーアイコン画像のファイル形式チェック
+document.getElementById("icon").addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    const name = file.name.toLowerCase();
+
+    const allowed = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp"];
+
+    const ok = allowed.some(ext => name.endsWith(ext));
+
+    if (!ok) {
+        alert("画像ファイル（jpg/png/gif/webp）のみ選択できます");
+        this.value = "";
+    }
 });

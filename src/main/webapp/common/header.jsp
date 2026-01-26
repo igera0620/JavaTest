@@ -24,7 +24,7 @@
 
 <header class="site-header">
   <div class="header-left">
-    <h1><a href="<%= request.getContextPath() %>/view/index.jsp">ユニサーブ</a></h1>
+    <h1><a href="<%= request.getContextPath() %>/view/index.jsp">タスク管理</a></h1>
   </div>
 
   <% if (loginUserEmail != null) { %>
@@ -34,8 +34,8 @@
       <div id="userMenu">
         <p><strong><%= loginUserEmail %></strong></p>
         <a href="<%= request.getContextPath() %>/ProfileServlet">プロフィール編集</a>
-        <a href="<%= request.getContextPath() %>/view/setting.jsp">設定</a>
-        <a href="<%= request.getContextPath() %>/LogoutEngine">ログアウト</a>
+        <a href="<%= request.getContextPath() %>/SettingServlet">設定</a>
+        <a href="<%= request.getContextPath() %>/LogoutServlet">ログアウト</a>
       </div>
     </div>
   </div>

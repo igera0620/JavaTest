@@ -340,9 +340,12 @@ a:hover {
 /* 小型ボタン専用 */
 .action-buttons .btn,
 .action-buttons .danger_btn {
-	width: 70px !important; /* ← ここで幅を強制上書き */
-	padding: 5px 8px !important; /* ← 高さも少し小さめに */
-	font-size: 12px !important; /* ← 文字も少し小さく */
+	width: 70px !important;
+	/* ← ここで幅を強制上書き */
+	padding: 5px 8px !important;
+	/* ← 高さも少し小さめに */
+	font-size: 12px !important;
+	/* ← 文字も少し小さく */
 	border-radius: 4px !important;
 	font-weight: bold;
 	cursor: pointer;
@@ -465,12 +468,42 @@ a:hover {
 
 .task-tag {
 	display: inline-block;
-	padding: 5px 12px;      /* 少し広め、btn に寄せる */
-	background-color: var(--tag-color, #777); /* デフォルト色 + 上書き可能 */
-    color: #fff;            /* 文字色は白 */
-    border-radius: 6px;     /* submitボタンの角丸に寄せる */
-    font-size: 13px;        /* 少し大きめにして見やすく */
-    font-weight: 600;       /* submitボタン風に太字 */
-    letter-spacing: 0.5px;  /* 少しだけ文字間を広げる */
-    margin-top: 4px;
+	padding: 5px 12px;
+	/* 少し広め、btn に寄せる */
+	background-color: var(--tag-color, #777);
+	/* デフォルト色 + 上書き可能 */
+	color: #fff;
+	/* 文字色は白 */
+	border-radius: 6px;
+	/* submitボタンの角丸に寄せる */
+	font-size: 13px;
+	/* 少し大きめにして見やすく */
+	font-weight: 600;
+	/* submitボタン風に太字 */
+	letter-spacing: 0.5px;
+	/* 少しだけ文字間を広げる */
+	margin-top: 4px;
+}
+
+.priority-icon {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	/* 丸 */
+}
+
+.priority-icon.high {
+	background-color: #d32f2f;
+	/* 赤 */
+}
+
+.priority-icon.middle {
+	background-color: #f9a825;
+	/* 黄 */
+}
+
+.priority-icon.low {
+	background-color: #388e3c;
+	/* 緑 */
 }
