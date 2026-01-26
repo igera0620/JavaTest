@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("ymForm");
 
     // contextPath を JSP から渡す（必要なので）
-    const contextPath = form.getAttribute("action").replace("/CalendarEngine", "");
+    const contextPath = form.getAttribute("action").replace("/CalendarServlet", "");
 
     // ① span をクリック → セレクト表示
     monthDisplay.addEventListener("click", () => {
@@ -116,4 +116,24 @@ document.addEventListener("DOMContentLoaded", () => {
         select.style.display = "none";
         monthDisplay.style.display = "inline";
     });
+});
+
+// タスク作成・編集ページの日付制御
+document.addEventListener("DOMContentLoaded", () => {
+  const startInput = document.getElementById("task_date_start");
+  const endInput   = document.getElementById("task_date_end");
+
+  if (!startInput || !endInput) return; // 他ページでエラー防止
+
+  if (startInput.value) {
+    endInput.min = startInput.value;
+  }
+
+  startInput.addEventListener("change", () => {
+    endInput.min = startInput.value;
+
+    if (endInput.value && endInput.value < startInput.value) {
+      endInput.value = startInput.value;
+    }
+  });
 });
