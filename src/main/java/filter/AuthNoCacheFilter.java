@@ -39,6 +39,7 @@ public class AuthNoCacheFilter implements Filter {
         // ここが抜けるとログインできなくなる
         boolean isPublic =
                 path.equals("/LoginServlet") ||
+                path.equals("/CreateServlet") ||
                 path.equals("/LogoutServlet") ||
                 path.startsWith("/view/auth/"); // login.jsp / create.jsp など
 
